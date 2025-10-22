@@ -1,1 +1,119 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoLogic Dashboard</title>
+<style>
+  body{font-family:'Segoe UI',sans-serif;background:#f6fff9;margin:0}
+  header{background:linear-gradient(to right,#00b85c,#27c177);color:#fff;padding:15px 40px;display:flex;justify-content:space-between;align-items:center}
+  header h1{font-size:22px}
+  header nav a{color:#fff;margin-left:20px;text-decoration:none;font-weight:500}
+  .container{padding:30px 50px}
+  .title{font-size:26px;font-weight:600;margin-bottom:5px}
+  .subtitle{color:#555;margin-bottom:25px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+  .card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+  .status{background:#d7f9e9;color:#067d45;padding:4px 10px;border-radius:10px;font-size:13px;margin-left:8px}
+  .status.warning{background:#fff3d1;color:#b87700}
+  .value{font-size:30px;margin:10px 0;font-weight:600}
+  .change{font-size:14px}
+  .change.up{color:#008a17}.change.down{color:#d60f0f}
+  .alert-section{margin-top:40px}
+  .alert{background:#fff;border-radius:10px;padding:15px 20px;margin-bottom:12px;box-shadow:0 2px 5px rgba(0,0,0,0.05);display:flex;justify-content:space-between;align-items:center}
+  .alert h4{margin:0 0 5px 0}
+  .badge{padding:4px 10px;border-radius:10px;font-size:13px}
+  .badge.warning{background:#fff3d1;color:#b87700}
+  .badge.critical{background:#ffd8d8;color:#c60000}
+</style>
+</head>
+<body>
+<header>
+  <h1>🌿 EcoLogic</h1>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="devices.html">Devices</a>
+    <a href="reports.html">Reports</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="title">Resource Conservation Dashboard</div>
+  <div class="subtitle">Monitor and optimize your energy and water usage in real-time</div>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Energy Usage <span class="status" id="energyStatus">Normal</span></h3>
+      <div class="value" id="energyValue">--</div>
+      <div class="change" id="energyChange">--</div>
+    </div>
+
+    <div class="card">
+      <h3>Water Consumption <span class="status warning" id="waterStatus">Warning</span></h3>
+      <div class="value" id="waterValue">--</div>
+      <div class="change" id="waterChange">--</div>
+    </div>
+
+    <div class="card">
+      <h3>Cost Savings <span class="status" id="costStatus">Normal</span></h3>
+      <div class="value" id="costValue">--</div>
+      <div class="change" id="costChange">--</div>
+    </div>
+
+    <div class="card">
+      <h3>Carbon Footprint <span class="status" id="carbonStatus">Normal</span></h3>
+      <div class="value" id="carbonValue">--</div>
+      <div class="change" id="carbonChange">--</div>
+    </div>
+  </div>
+
+  <div class="alert-section">
+    <h2>Active Alerts</h2>
+    <div class="alert">
+      <div>
+        <h4>⚠️ High Energy Usage</h4>
+        <p>HVAC system consuming more than usual</p>
+        <span>30 m ago</span>
+      </div>
+      <span class="badge warning">Warning</span>
+    </div>
+
+    <div class="alert">
+      <div>
+        <h4>💧 Water Usage Threshold Exceeded</h4>
+        <p>Daily water consumption above target</p>
+        <span>1 h ago</span>
+      </div>
+      <span class="badge critical">Critical</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Randomize dashboard + share to localStorage
+  function randomize() {
+    const energy=Math.floor(Math.random()*400)+100;
+    const water=Math.floor(Math.random()*80)+20;
+    const cost=Math.floor(Math.random()*200)+50;
+    const carbon=(Math.random()*3+1).toFixed(1);
+    const eChange=(Math.random()*10).toFixed(1);
+    const wChange=(Math.random()*10).toFixed(1);
+
+    document.getElementById("energyValue").innerText=`${energy} kWh`;
+    document.getElementById("waterValue").innerText=`${water} gallons`;
+    document.getElementById("costValue").innerText=`$${cost} this month`;
+    document.getElementById("carbonValue").innerText=`${carbon} tons CO₂`;
+    document.getElementById("energyChange").innerHTML=`▼ ${eChange}% vs last month`;
+    document.getElementById("waterChange").innerHTML=`▲ ${wChange}% vs last month`;
+
+    // Store data for other pages
+    localStorage.setItem("eco_energy",energy);
+    localStorage.setItem("eco_water",water);
+    localStorage.setItem("eco_cost",cost);
+    localStorage.setItem("eco_carbon",carbon);
+  }
+  window.onload=randomize;
+</script>
+</body>
+</html>
