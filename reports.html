@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoLogic Reports</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+  body{font-family:'Segoe UI',sans-serif;background:#f6fff9;margin:0}
+  header{background:linear-gradient(to right,#00b85c,#27c177);color:#fff;padding:15px 40px;display:flex;justify-content:space-between;align-items:center}
+  header nav a{color:#fff;margin-left:20px;text-decoration:none;font-weight:500}
+  .container{padding:30px 50px}
+  button{background:#00b85c;color:white;border:none;padding:12px 25px;border-radius:8px;cursor:pointer;font-size:16px}
+  button:hover{background:#009c4f}
+  .report-box{background:#fff;padding:20px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05);width:400px}
+</style>
+</head>
+<body>
+<header>
+  <h1>📄 EcoLogic Reports</h1>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="devices.html">Devices</a>
+    <a href="reports.html">Reports</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Generate Monthly Report</h2>
+  <div class="report-box">
+    <p><strong>Energy Usage:</strong> <span id="rEnergy">--</span> kWh</p>
+    <p><strong>Water Consumption:</strong> <span id="rWater">--</span> gallons</p>
+    <p><strong>Cost Savings:</strong> $<span id="rCost">--</span></p>
+    <p><strong>Carbon Footprint:</strong> <span id="rCarbon">--</span> tons CO₂</p>
+    <br>
+    <button id="downloadBtn">⬇️ Download PDF Report</button>
+  </div>
+</div>
+
+<script>
+  const { jsPDF } = window.jspdf;
+  // Load stored data
+  document.getElementById("rEnergy").textContent=localStorage.getItem("eco_energy")||"--";
+  document.getElementById("rWater").textContent=localStorage.getItem("eco_water")||"--";
+  document.getElementById("rCost").textContent=localStorage.getItem("eco_cost")||"--";
+  document.getElementById("rCarbon").textContent=localStorage.getItem("eco_carbon")||"--";
+
+  document.getElementById("downloadBtn").onclick=function(){
+    const doc=new jsPDF();
+    doc.setFontSize(18);
+    doc.text("EcoSmart Monthly Report",20,20);
+    doc.setFontSize(12);
+    doc.text(`Energy Usage: ${localStorage.getItem("eco_energy")} kWh`,20,40);
+    doc.text(`Water Consumption: ${localStorage.getItem("eco_water")} gallons`,20,50);
+    doc.text(`Cost Savings: $${localStorage.getItem("eco_cost")}`,20,60);
+    doc.text(`Carbon Footprint: ${localStorage.getItem("eco_carbon")} tons CO₂`,20,70);
+    doc.text(`Generated on: ${new Date().toLocaleString()}`,20,90);
+    doc.save("EcoSmart_Report.pdf");
+  }
+</script>
+</body>
+</html>
