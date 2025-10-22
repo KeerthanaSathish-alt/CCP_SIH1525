@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoLogic Devices</title>
+<style>
+  body{font-family:'Segoe UI',sans-serif;background:#f6fff9;margin:0}
+  header{background:linear-gradient(to right,#00b85c,#27c177);color:#fff;padding:15px 40px;display:flex;justify-content:space-between;align-items:center}
+  header nav a{color:#fff;margin-left:20px;text-decoration:none;font-weight:500}
+  .container{padding:30px 50px}
+  table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+  th,td{padding:15px;text-align:left;border-bottom:1px solid #eee}
+  th{background:#e7fbe7}
+  .on{color:#00b85c;font-weight:600}
+  .off{color:#c60000;font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <h1>🔌 EcoLogic Devices</h1>
+  <nav>
+    <a href="index.html">Dashboard</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="devices.html">Devices</a>
+    <a href="reports.html">Reports</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Connected Devices</h2>
+  <table>
+    <tr><th>Device</th><th>Status</th><th>Power Usage</th></tr>
+    <tr><td>HVAC System</td><td class="on">On</td><td>15%</td></tr>
+    <tr><td>Smart Lights</td><td class="off">Off</td><td>0%</td></tr>
+    <tr><td>Water Pump</td><td class="on">On</td><td>22%</td></tr>
+    <tr><td>Refrigeration Unit</td><td class="on">On</td><td>35%</td></tr>
+  </table>
+</div>
+</body>
+</html>
